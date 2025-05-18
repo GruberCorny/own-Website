@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Navbar konnte nicht geladen werden:', error));
     }
 
-    // Load footer
+    // Load footer with scroll behavior
     const footerPlaceholder = document.getElementById('footer-placeholder');
     if (footerPlaceholder) {
         fetch('/blocks/footer.html')
@@ -23,7 +23,30 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.text();
             })
             .then(html => {
-                footerPlaceholder.innerHTML = html;  // Fixed: was using navbarPlaceholder
+                footerPlaceholder.innerHTML = html;
+
+                // Nachdem der Footer geladen ist, Scroll-Event hinzufügen
+                const loadedFooter = document.querySelector('.scroll-activated-footer');
+                if (loadedFooter) {
+                    window.addEventListener('scroll', function () {
+                        // Berechne 95% der Seitenhöhe
+                        const scrollThreshold = document.body.scrollHeight * 0.95 - window.innerHeight;
+
+                        if (window.scrollY > scrollThreshold) {
+                            loadedFooter.classList.add('visible');
+                        } else {
+                            loadedFooter.classList.remove('visible');
+                        }
+                    });
+
+                    // Initialen Zustand prüfen
+                    setTimeout(() => {
+                        const initialThreshold = document.body.scrollHeight * 0.95 - window.innerHeight;
+                        if (window.scrollY > initialThreshold) {
+                            loadedFooter.classList.add('visible');
+                        }
+                    }, 100);
+                }
             })
             .catch(error => console.error('Footer konnte nicht geladen werden:', error));
     }
