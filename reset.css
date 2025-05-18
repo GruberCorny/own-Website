@@ -28,9 +28,10 @@
     }
 
     :where(*) {
-        /* 2. Remove default margin */
+        /* 2. Remove default margin adds inheritance */
         margin: 0;
         padding: 0;
+        color: inherit;
     }
 
     :where(ol,
@@ -91,7 +92,6 @@
         h5,
         h6) {
         overflow-wrap: break-word;
-        color: var(--fg);
         text-decoration: none;
     }
 
