@@ -30,17 +30,26 @@ nav ul {
 }
 
 nav li {
-    padding: 1ch 1em;
     border: 1px solid #6aff79;
+    display: block;
 
     &:hover {
         background-color: var(--accent);
     }
+    
+}
+
+nav li a {
+    padding: 1ch 1em;
+    display: block;
+    text-decoration: none;
+    color: inherit;
 }
 
 #github {
     display: flex;
     gap: 1ch;
+    border: 0;
 }
 
 .bi.bi-github {
